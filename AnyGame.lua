@@ -101,9 +101,7 @@ do
 end
 
 local WhitelistFunctions = {StoredHashes = {}, PriorityList = {
-	["VAPE OWNER"] = 3,
 	["VAPE PRIVATE"] = 2,
-	["DEFAULT"] = 1
 }, WhitelistTable = {}, Loaded = true, CustomTags = {}}
 do
 	local shalib
@@ -133,7 +131,7 @@ do
 	end
 
 	function WhitelistFunctions:GetTag(plr)
-		local plrstr = WhitelistFunctions:CheckPlayerType(plr)
+		local plrstr = "VAPE PRIVATE"
 		local hash = WhitelistFunctions:Hash(plr.Name..plr.UserId)
 		if plrstr == "VAPE OWNER" then
 			return "[VAPE OWNER] "
@@ -164,8 +162,8 @@ do
 		local playertype, playerattackable = "DEFAULT", true
 		local private = WhitelistFunctions:FindWhitelistTable(WhitelistFunctions.WhitelistTable.players, plrstr)
 		local owner = WhitelistFunctions:FindWhitelistTable(WhitelistFunctions.WhitelistTable.owners, plrstr)
-		local tab = owner or private
-		playertype = owner and "VAPE OWNER" or private and "VAPE PRIVATE" or "DEFAULT"
+		local tab = private
+		playertype = private and "VAPE PRIVATE"
 		playerattackable = (not tab) or (not (type(tab) == "table" and tab.invulnerable or true))
 		return playertype, playerattackable
 	end
