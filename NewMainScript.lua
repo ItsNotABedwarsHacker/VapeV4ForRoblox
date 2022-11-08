@@ -1,7 +1,7 @@
 repeat task.wait() until game:IsLoaded() == true
 local injected = true
 local oldrainbow = false
-local customdir = (shared.VapePrivate and "vapeprivate/" or "vape/")
+local customdir = true
 local betterisfile = function(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
@@ -1680,8 +1680,7 @@ local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(f
 		if shared.VapeDeveloper then
 			teleportstr = 'shared.VapeDeveloper = true '..teleportstr
 		end
-		if shared.VapePrivate then
-			teleportstr = 'shared.VapePrivate = true '..teleportstr
+		teleportstr = 'shared.VapePrivate = true '..teleportstr
 		end
 		if shared.VapeCustomProfile then 
 			teleportstr = "shared.VapeCustomProfile = '"..shared.VapeCustomProfile.."'"..teleportstr
@@ -1854,10 +1853,7 @@ else
 			loadstring(publicrepo)()
 		end
 	end
-	if shared.VapePrivate then
-		if pcall(function() readfile("vapeprivate/CustomModules/"..game.PlaceId..".lua") end) then
-			loadstring(readfile("vapeprivate/CustomModules/"..game.PlaceId..".lua"))()
-		end	
+	loadstring(readfile("vapeprivate/CustomModules/"..game.PlaceId..".lua"))()
 	end
 	GuiLibrary["LoadSettings"](shared.VapeCustomProfile)
 	local profiles = {}
